@@ -37,7 +37,6 @@ class _NavigationViewState extends State<NavigationView> {
     return Scaffold(
       appBar: AppBar(
         title: _titles[_selectedIndex],
-        centerTitle: true,
       ),
       body: _views[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
