@@ -11,4 +11,4 @@ PRODUCT_NAME = nplusone
 PRODUCT_BUNDLE_IDENTIFIER = com.haeseong.nplusone
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 com.haeseong. All rights reserved.
