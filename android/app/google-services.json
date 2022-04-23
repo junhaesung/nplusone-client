@@ -37,6 +37,13 @@
             {
               "client_id": "496948957842-iq873hspfa6o9qbko2heklk2ltqb7me7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "496948957842-44n7cn42ntedtcu4a7mq9dci1lts6tgs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.haeseong.nplusone"
+              }
             }
           ]
         }

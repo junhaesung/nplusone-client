@@ -35,3 +35,6 @@ Runner/GeneratedPluginRegistrant.*
 
 # Custom
 /build/
+
+# fastlane
+/fastlane/report.xml
