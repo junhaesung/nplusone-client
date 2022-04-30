@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
 import 'category_view.dart';
@@ -65,7 +66,13 @@ class _NavigationViewState extends State<NavigationView> {
     );
   }
 
-  _onItemTapped(int index) {
+  _onItemTapped(int index) async {
+    await FirebaseAnalytics.instance
+        .setCurrentScreen(
+        screenName: index == 0 ? 'Category'
+            : index == 1 ? 'Search'
+            : 'Setting'
+    );
     setState(() {
       _selectedIndex = index;
     });
