@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:nplusone/firebase_options.dart';
 import 'package:nplusone/view/navigation_view.dart';
@@ -21,6 +22,26 @@ void main() async {
         print("Unkown error.");
     }
   }
+  // 권한 검사. 왜인지 iOS 에만 나옴
+  NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission');
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    print('User granted provisional permission');
+  } else {
+    print('User declined or has not accepted permission');
+  }
+  final token = await FirebaseMessaging.instance.getToken();
+  print("token: $token");
   runApp(const MyApp());
 }
 
