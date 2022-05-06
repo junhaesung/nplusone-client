@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:nplusone/adapter/api/my_http_overrides.dart';
 import 'package:nplusone/firebase_options.dart';
 import 'package:nplusone/view/navigation_view.dart';
 
@@ -42,6 +45,8 @@ void main() async {
   }
   final token = await FirebaseMessaging.instance.getToken();
   print("token: $token");
+
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 
