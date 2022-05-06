@@ -20,4 +20,19 @@ enum StoreType {
         return "MINISTOP";
     }
   }
+
+  String getQueryName() {
+    switch(this) {
+      case StoreType.gs25:
+        return "GS25";
+      case StoreType.cu:
+        return "CU";
+      case StoreType.sevenEleven:
+        return "SEVEN_ELEVEN";
+      case StoreType.emart24:
+        return "EMART24";
+      case StoreType.ministop:
+        return "MINISTOP";
+    }
+  }
 }

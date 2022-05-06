@@ -2,26 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:nplusone/adapter/api/dto/item_response.dart';
 import 'package:nplusone/adapter/api/nplusone_api.dart';
+import 'package:nplusone/domain/store/store_type.dart';
 
 class ItemListView extends StatefulWidget {
-  const ItemListView({Key? key, required this.storeName}) : super(key: key);
-  final String storeName;
+  const ItemListView({Key? key, required this.storeType}) : super(key: key);
+  final StoreType storeType;
 
   @override
   State<StatefulWidget> createState() {
-    return _ItemListViewState(storeName);
+    return _ItemListViewState(storeType);
   }
 }
 
 class _ItemListViewState extends State<ItemListView> {
-  _ItemListViewState(this.storeName);
+  _ItemListViewState(this.storeType);
 
   static const _pageSize = 20;
 
   final PagingController<int, ItemResponse> _pagingController =
       PagingController(firstPageKey: 0);
   final nplusoneApi = const NplusoneApi();
-  final String storeName;
+  final StoreType storeType;
 
   @override
   void initState() {
@@ -37,13 +38,27 @@ class _ItemListViewState extends State<ItemListView> {
     // package takes care of that. If you want to customize them, use the
     // [PagedChildBuilderDelegate] properties.
     return Scaffold(
-      appBar: AppBar(title: Text(storeName)),
+      appBar: AppBar(title: Text(storeType.getName())),
       body: PagedListView<int, ItemResponse>(
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<ItemResponse>(
           itemBuilder: (context, item, index) => ListTile(
             title: Text(item.name),
-            subtitle: Text(item.price),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(item.price),
+                Text(item.storeType),
+                Text(item.discountType),
+                Text(item.referenceDate),
+              ],
+            ),
+            trailing: item.imageUrl != null ? Image.network(
+              item.imageUrl!,
+              errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                return const Text('not found');
+              },
+            ) : null,
           ),
         ),
       ),
@@ -57,6 +72,7 @@ class _ItemListViewState extends State<ItemListView> {
       final apiResponse = await nplusoneApi.getItems(
         offsetId: offsetId,
         size: _pageSize,
+        storeType: storeType,
       );
       final isLastPage = apiResponse.hasNext == false;
       if (isLastPage) {
