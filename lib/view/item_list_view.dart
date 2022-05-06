@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:nplusone/adapter/api/dto/item_response.dart';
 import 'package:nplusone/adapter/api/nplusone_api.dart';
-import 'package:nplusone/domain/store/store_type.dart';
+import 'package:nplusone/domain/store_type.dart';
 
 class ItemListView extends StatefulWidget {
   const ItemListView({Key? key, required this.storeType}) : super(key: key);

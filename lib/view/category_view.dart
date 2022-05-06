@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nplusone/domain/store/store_type.dart';
+import 'package:nplusone/domain/store_type.dart';
 import 'package:nplusone/view/item_list_view.dart';
 
 class CategoryView extends StatelessWidget {
