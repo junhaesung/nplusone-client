@@ -1,1 +1,1 @@
-Firebase App Distribution Test
+- Category 로 상품 목록 조회 기능 추가
