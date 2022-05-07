@@ -9,6 +9,12 @@ class SearchView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('검색'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+          ),
+        ],
       ),
       body: Container(),
       bottomNavigationBar: const BottomTabBar(),
