@@ -13,9 +13,9 @@ enum StoreType {
       case StoreType.cu:
         return "CU";
       case StoreType.sevenEleven:
-        return "7ELEVEN";
+        return "7-ELEVEN";
       case StoreType.emart24:
-        return "Emart24";
+        return "emart24";
       case StoreType.ministop:
         return "MINISTOP";
     }
