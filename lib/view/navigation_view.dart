@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'category_view.dart';
 import 'search_view.dart';
-import 'setting_view.dart';
+import 'item_view.dart';
+import 'more_view.dart';
 
 class NavigationView extends StatefulWidget {
   const NavigationView({Key? key}) : super(key: key);
@@ -24,12 +25,14 @@ class _NavigationViewState extends State<NavigationView> {
     _titles.addAll([
       const Text('카테고리'),
       const Text('검색'),
-      const Text('설정'),
+      const Text('상품'),
+      const Text('더보기'),
     ]);
     _views.addAll([
       const CategoryView(),
       const SearchView(),
-      const SettingView(),
+      const ItemView(),
+      const MoreView(),
     ]);
   }
 
@@ -51,8 +54,12 @@ class _NavigationViewState extends State<NavigationView> {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Setting',
+            icon: Icon(Icons.book_outlined),
+            label: 'Item',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.more_horiz_outlined),
+            label: 'More',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -71,7 +78,8 @@ class _NavigationViewState extends State<NavigationView> {
         .setCurrentScreen(
         screenName: index == 0 ? 'Category'
             : index == 1 ? 'Search'
-            : 'Setting'
+            : index == 2 ? 'Item'
+            : "More"
     );
     setState(() {
       _selectedIndex = index;
