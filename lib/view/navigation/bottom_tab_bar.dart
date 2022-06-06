@@ -20,8 +20,12 @@ class BottomTabBar extends StatelessWidget {
               label: 'Search',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Setting',
+              icon: Icon(Icons.book_outlined),
+              label: 'Item',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.more_horiz_outlined),
+              label: 'More',
             ),
           ],
           currentIndex: state.index,
@@ -35,6 +39,9 @@ class BottomTabBar extends StatelessWidget {
             }
             if (index == 2) {
               context.read<TabPageCubit>().showSettingPage();
+            }
+            if (index == 3) {
+              context.read<TabPageCubit>().showMorePage();
             }
           },
           unselectedItemColor: Colors.grey,

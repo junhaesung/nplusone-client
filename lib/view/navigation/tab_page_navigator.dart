@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nplusone/view/category_view.dart';
+import 'package:nplusone/view/more_view.dart';
 import 'package:nplusone/view/navigation/tab_page_cubit.dart';
 import 'package:nplusone/view/search_view.dart';
-import 'package:nplusone/view/setting_view.dart';
+import 'package:nplusone/view/item_view.dart';
 
 class TabPageNavigator extends StatelessWidget {
   const TabPageNavigator({Key? key}) : super(key: key);
@@ -23,8 +24,8 @@ class TabPageNavigator extends StatelessWidget {
       if (state == TabPageState.category)
         const MaterialPage(child: CategoryView()),
       if (state == TabPageState.search) const MaterialPage(child: SearchView()),
-      if (state == TabPageState.setting)
-        const MaterialPage(child: SettingView()),
+      if (state == TabPageState.item) const MaterialPage(child: ItemView()),
+      if (state == TabPageState.more) const MaterialPage(child: MoreView()),
     ];
   }
 }
