@@ -1,4 +1,5 @@
 import 'package:nplusone/adapter/api/dto/item_response.dart';
+import 'package:nplusone/adapter/api/dto/login_response.dart';
 import 'package:nplusone/adapter/api/dto/search_history_response.dart';
 import 'package:nplusone/adapter/api/dto/search_word_response.dart';
 
@@ -21,6 +22,14 @@ class ApiResponse<T> {
     return ApiResponse(
       code: json['code'] as String,
       message: json['message'] as String,
+    );
+  }
+
+  static ApiResponse<LoginResponse> loginResponse(Map<String, dynamic> json) {
+    return ApiResponse(
+      code: json['code'] as String,
+      message: json['message'] as String,
+      data: LoginResponse.fromJson(json['data']),
     );
   }
 
