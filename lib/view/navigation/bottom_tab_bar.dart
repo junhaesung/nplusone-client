@@ -38,7 +38,7 @@ class BottomTabBar extends StatelessWidget {
               context.read<TabPageCubit>().showSearchPage();
             }
             if (index == 2) {
-              context.read<TabPageCubit>().showSettingPage();
+              context.read<TabPageCubit>().showItemPage();
             }
             if (index == 3) {
               context.read<TabPageCubit>().showMorePage();

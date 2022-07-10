@@ -27,7 +27,7 @@ class NplusoneApi {
       queryParameterMap['storeType'] = storeType.getQueryName();
     }
     queryParameterMap['offsetId'] = offsetId.toString();
-    queryParameterMap['size'] = size.toString();
+    queryParameterMap['pageSize'] = size.toString();
     return http
         .get(Uri.http(_host, '/api/v1/items', queryParameterMap))
         .then((value) => json.decode(utf8.decode(value.bodyBytes)))
