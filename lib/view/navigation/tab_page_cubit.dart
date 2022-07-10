@@ -17,7 +17,7 @@ class TabPageCubit extends Cubit<TabPageState> {
     }
   }
 
-  showSettingPage() {
+  showItemPage() {
     if (state != TabPageState.item) {
       emit(TabPageState.item);
     }
