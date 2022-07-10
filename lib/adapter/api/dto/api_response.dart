@@ -1,4 +1,6 @@
 import 'package:nplusone/adapter/api/dto/item_response.dart';
+import 'package:nplusone/adapter/api/dto/search_history_response.dart';
+import 'package:nplusone/adapter/api/dto/search_word_response.dart';
 
 class ApiResponse<T> {
   String code;
@@ -33,6 +35,35 @@ class ApiResponse<T> {
           : null,
       hasNext: json['hasNext'],
       offsetId: json['offsetId'],
+    );
+  }
+
+  /// TODO: paging
+  static ApiResponse<List<SearchHistoryResponse>> searchHistoryResponse(
+    Map<String, dynamic> json,
+  ) {
+    return ApiResponse(
+      code: json['code'] as String,
+      message: json['message'] as String,
+      data: json['data'] != null
+          ? (json['data'] as List)
+              .map((e) => SearchHistoryResponse.fromJson(e))
+              .toList()
+          : null,
+    );
+  }
+
+  static ApiResponse<List<SearchWordResponse>> searchWordResponse(
+    Map<String, dynamic> json,
+  ) {
+    return ApiResponse(
+      code: json['code'] as String,
+      message: json['message'] as String,
+      data: json['data'] != null
+          ? (json['data'] as List)
+              .map((e) => SearchWordResponse.fromJson(e))
+              .toList()
+          : null,
     );
   }
 
