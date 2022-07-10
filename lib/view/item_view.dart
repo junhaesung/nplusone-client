@@ -154,7 +154,7 @@ enum StoreTab {
         return "이마트24";
       case SEVEN_ELEVEN:
         return "세븐일레븐";
-      case StoreTab.MINISTOP:
+      case MINISTOP:
         return "미니스톱";
       default:
         return "";
@@ -173,7 +173,7 @@ enum StoreTab {
         return StoreType.emart24;
       case SEVEN_ELEVEN:
         return StoreType.sevenEleven;
-      case StoreTab.MINISTOP:
+      case MINISTOP:
         return StoreType.ministop;
       default:
         return null;
