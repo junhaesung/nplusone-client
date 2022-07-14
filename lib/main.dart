@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nplusone/adapter/api/my_http_overrides.dart';
 import 'package:nplusone/adapter/api/nplusone_api.dart';
+import 'package:nplusone/adapter/storage/token_storage_api.dart';
 import 'package:nplusone/app.dart';
 import 'package:nplusone/firebase_options.dart';
 
@@ -17,10 +18,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  late String firebaseUserId;
   try {
     final userCredential = await FirebaseAuth.instance.signInAnonymously();
     if (kDebugMode) {
       print("Signed in with temporary account. userCredential: $userCredential}");
+      firebaseUserId = userCredential.user!.uid;
     }
   } on FirebaseAuthException catch (e) {
     switch (e.code) {
@@ -31,7 +34,7 @@ void main() async {
         break;
       default:
         if (kDebugMode) {
-          print("Unkown error.");
+          print("Unknown error.");
         }
     }
   }
@@ -59,19 +62,21 @@ void main() async {
       print('User declined or has not accepted permission');
     }
   }
-  final token = await FirebaseMessaging.instance.getToken();
+  final firebaseToken = await FirebaseMessaging.instance.getToken();
   if (kDebugMode) {
-    print("token: $token");
+    print("token: $firebaseToken");
   }
 
-  // login
+  // Login
   const api = NplusoneApi();
-  final apiResponse = await api.login(firebaseToken: token!);
+  final apiResponse = await api.login(firebaseUserId: firebaseUserId);
   if (kDebugMode) {
     print('loginResponse: $apiResponse');
   }
 
-  // TODO: save accessToken
+  // Save accessToken
+  const tokenStorageApi = TokenStorageApi();
+  tokenStorageApi.write(apiResponse.data!.accessToken);
 
   HttpOverrides.global = MyHttpOverrides();
   runApp(const NplusoneApp());
