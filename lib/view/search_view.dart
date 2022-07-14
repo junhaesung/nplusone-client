@@ -4,6 +4,7 @@ import 'package:nplusone/adapter/api/dto/api_response.dart';
 import 'package:nplusone/adapter/api/dto/search_history_response.dart';
 import 'package:nplusone/adapter/api/dto/search_word_response.dart';
 import 'package:nplusone/adapter/api/nplusone_api.dart';
+import 'package:nplusone/view/appbar/nplusone_app_bar.dart';
 import 'package:nplusone/view/navigation/bottom_tab_bar.dart';
 
 class SearchView extends StatefulWidget {
@@ -22,24 +23,7 @@ class SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(
-          Icons.menu,
-          color: Colors.black54,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.notifications_outlined,
-              color: Colors.black54,
-            ),
-          ),
-        ],
-        backgroundColor: Colors.transparent,
-        // Remove shadow
-        elevation: 0,
-      ),
+      appBar: NplusoneAppBar.search(),
       body: FutureBuilder(
         future: Future.wait([
           api.getSearchHistories(),
