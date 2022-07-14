@@ -1,7 +1,7 @@
 part of 'tab_page_cubit.dart';
 
 enum TabPageState {
-  category,
+  home,
   search,
   item,
   more,

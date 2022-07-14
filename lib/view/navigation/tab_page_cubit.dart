@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'tab_page_state.dart';
 
 class TabPageCubit extends Cubit<TabPageState> {
-  TabPageCubit() : super(TabPageState.category);
+  TabPageCubit() : super(TabPageState.home);
 
   showCategoryPage() {
-    if (state != TabPageState.category) {
-      emit(TabPageState.category);
+    if (state != TabPageState.home) {
+      emit(TabPageState.home);
     }
   }
 

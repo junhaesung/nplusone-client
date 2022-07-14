@@ -3,14 +3,14 @@ import 'package:nplusone/domain/store_type.dart';
 import 'package:nplusone/view/item_list_view.dart';
 import 'package:nplusone/view/navigation/bottom_tab_bar.dart';
 
-class CategoryView extends StatelessWidget {
-  const CategoryView({Key? key}) : super(key: key);
+class HomeView extends StatelessWidget {
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('카테고리'),
+        title: const Text('홈'),
       ),
       body: _getListView(),
       bottomNavigationBar: const BottomTabBar(),

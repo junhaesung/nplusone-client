@@ -1,7 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
-import 'category_view.dart';
+import 'home_view.dart';
 import 'search_view.dart';
 import 'item_view.dart';
 import 'more_view.dart';
@@ -23,13 +23,13 @@ class _NavigationViewState extends State<NavigationView> {
     super.initState();
 
     _titles.addAll([
-      const Text('카테고리'),
+      const Text('홈'),
       const Text('검색'),
       const Text('상품'),
       const Text('더보기'),
     ]);
     _views.addAll([
-      const CategoryView(),
+      const HomeView(),
       const SearchView(),
       const ItemView(),
       const MoreView(),
@@ -47,7 +47,7 @@ class _NavigationViewState extends State<NavigationView> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
-            label: 'Category',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
@@ -76,7 +76,7 @@ class _NavigationViewState extends State<NavigationView> {
   _onItemTapped(int index) async {
     await FirebaseAnalytics.instance
         .setCurrentScreen(
-        screenName: index == 0 ? 'Category'
+        screenName: index == 0 ? 'Home'
             : index == 1 ? 'Search'
             : index == 2 ? 'Item'
             : "More"
