@@ -12,8 +12,8 @@ class BottomTabBar extends StatelessWidget {
         return BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: 'Category',
+              icon: Icon(Icons.home_outlined),
+              label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
@@ -32,7 +32,7 @@ class BottomTabBar extends StatelessWidget {
           selectedItemColor: Colors.blue,
           onTap: (int index) {
             if (index == 0) {
-              context.read<TabPageCubit>().showCategoryPage();
+              context.read<TabPageCubit>().showHomePage();
             }
             if (index == 1) {
               context.read<TabPageCubit>().showSearchPage();
