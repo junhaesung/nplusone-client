@@ -6,6 +6,7 @@ import 'package:nplusone/adapter/api/nplusone_api.dart';
 import 'package:nplusone/domain/store_type.dart';
 import 'package:nplusone/view/appbar/nplusone_app_bar.dart';
 import 'package:nplusone/view/navigation/bottom_tab_bar.dart';
+import 'package:nplusone/view/nplusone_color.dart';
 
 class ItemView extends StatefulWidget {
   const ItemView({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class _ItemViewState extends State<ItemView> {
                         ),
                       ))
                   .toList(),
-              indicatorColor: const Color.fromRGBO(45, 00, 255, 1.0),
+              indicatorColor: NplusoneColor.purple,
               indicatorWeight: 3.0,
             ),
             Expanded(
