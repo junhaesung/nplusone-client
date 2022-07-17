@@ -5,6 +5,7 @@ import 'package:nplusone/adapter/api/dto/item_response.dart';
 import 'package:nplusone/adapter/api/nplusone_api.dart';
 import 'package:nplusone/domain/store_type.dart';
 import 'package:nplusone/view/appbar/nplusone_app_bar.dart';
+import 'package:nplusone/view/item/item_card.dart';
 import 'package:nplusone/view/navigation/bottom_tab_bar.dart';
 import 'package:nplusone/view/nplusone_color.dart';
 
@@ -17,25 +18,35 @@ class ItemView extends StatefulWidget {
 
 class _ItemViewState extends State<ItemView> {
   // TODO: dependency injection
-  final api = const NplusoneApi();
-  StoreTab storeTab = StoreTab.ALL;
+  final _api = const NplusoneApi();
+  final Map<_StoreTab, int> offsetIdMap = {
+    for (final e in _StoreTab.values) e: 0
+  };
+
+  _StoreTab storeTab = _StoreTab.all;
+
+  @override
+  void initState() {
+    super.initState();
+    storeTab = _StoreTab.all;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NplusoneAppBar.item(),
       body: DefaultTabController(
-        length: StoreTab.values.length,
+        length: _StoreTab.values.length,
         child: Column(
           children: [
             TabBar(
               isScrollable: true,
               onTap: (value) {
                 setState(() {
-                  storeTab = StoreTab.values[value];
+                  storeTab = _StoreTab.values[value];
                 });
               },
-              tabs: StoreTab.values
+              tabs: _StoreTab.values
                   .map((e) => Tab(
                         child: Text(
                           e.getName(),
@@ -47,70 +58,7 @@ class _ItemViewState extends State<ItemView> {
               indicatorWeight: 3.0,
             ),
             Expanded(
-              child: FutureBuilder<ApiResponse<List<ItemResponse>>>(
-                future: api.getItems(
-                  storeType: storeTab.toStoreType(),
-                  size: 10000,
-                ),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Container();
-                  }
-                  final itemResponses = snapshot.data!.data!;
-                  final totalCount = itemResponses.length;
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("전체: $totalCount"),
-                        Expanded(
-                          child: GridView.count(
-                            crossAxisCount: 2,
-                            childAspectRatio: 90 / 120,
-                            // crossAxisSpacing: 12,
-                            shrinkWrap: true,
-                            physics: const ScrollPhysics(),
-                            children: itemResponses
-                                .map((e) => Card(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Center(
-                                            child: Image.network(
-                                              e.imageUrl!,
-                                              height: 150,
-                                              errorBuilder:
-                                                  (BuildContext context,
-                                                      Object error,
-                                                      StackTrace? stackTrace) {
-                                                if (kDebugMode) {
-                                                  print("error: $error");
-                                                  print(
-                                                      "stackTrace: $stackTrace");
-                                                }
-                                                return Container(
-                                                  height: 150,
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                          Text(e.storeType),
-                                          Text(e.name),
-                                          Text("${e.price}원"),
-                                          Text(e.discountType),
-                                        ],
-                                      ),
-                                    ))
-                                .toList(),
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
+              child: _buildWithFutureBuilder(),
             ),
           ],
         ),
@@ -118,30 +66,66 @@ class _ItemViewState extends State<ItemView> {
       bottomNavigationBar: const BottomTabBar(),
     );
   }
+
+  // TODO: paging
+  FutureBuilder<ApiResponse<List<ItemResponse>>> _buildWithFutureBuilder() {
+    return FutureBuilder<ApiResponse<List<ItemResponse>>>(
+      future: _api.getItems(
+        storeType: storeTab.toStoreType(),
+        size: 10000,
+      ),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Container();
+        }
+        final itemResponses = snapshot.data!.data!;
+        final totalCount = itemResponses.length;
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("전체: $totalCount"),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: 90 / 120,
+                  // crossAxisSpacing: 12,
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  children: itemResponses.map((e) => ItemCard(e)).toList(),
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
 
-enum StoreTab {
-  ALL,
-  CU,
-  GS25,
-  EMART24,
-  SEVEN_ELEVEN,
-  MINISTOP,
+enum _StoreTab {
+  all,
+  cu,
+  gs25,
+  emart24,
+  sevenEleven,
+  ministop,
   ;
 
   String getName() {
     switch (this) {
-      case ALL:
+      case all:
         return "전체";
-      case CU:
+      case cu:
         return "CU";
-      case GS25:
+      case gs25:
         return "GS25";
-      case EMART24:
+      case emart24:
         return "이마트24";
-      case SEVEN_ELEVEN:
+      case sevenEleven:
         return "세븐일레븐";
-      case MINISTOP:
+      case ministop:
         return "미니스톱";
       default:
         return "";
@@ -150,17 +134,17 @@ enum StoreTab {
 
   StoreType? toStoreType() {
     switch (this) {
-      case ALL:
+      case all:
         return null;
-      case CU:
+      case cu:
         return StoreType.cu;
-      case GS25:
+      case gs25:
         return StoreType.gs25;
-      case EMART24:
+      case emart24:
         return StoreType.emart24;
-      case SEVEN_ELEVEN:
+      case sevenEleven:
         return StoreType.sevenEleven;
-      case MINISTOP:
+      case ministop:
         return StoreType.ministop;
       default:
         return null;

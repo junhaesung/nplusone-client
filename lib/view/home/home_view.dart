@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nplusone/domain/store_type.dart';
 import 'package:nplusone/view/appbar/nplusone_app_bar.dart';
 import 'package:nplusone/view/navigation/bottom_tab_bar.dart';
+import 'package:nplusone/view/store/store_label.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -29,104 +31,23 @@ class HomeView extends StatelessWidget {
   Widget _getStoreTabWidget() {
     final tabData = [
       StoreTabData(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              'CU',
-              style: TextStyle(
-                color: Color.fromRGBO(160, 199, 59, 1.0),
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
+        title: StoreLabel.of(StoreType.cu),
         color: const Color.fromRGBO(245, 249, 233, 1.0),
       ),
       StoreTabData(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              'GS',
-              style: TextStyle(
-                color: Color.fromRGBO(14, 99, 175, 1.0),
-                fontSize: 14,
-              ),
-            ),
-            Text(
-              '25',
-              style: TextStyle(
-                color: Color.fromRGBO(42, 176, 211, 1.0),
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
+        title: StoreLabel.of(StoreType.gs25),
         color: const Color.fromRGBO(230, 247, 250, 1.0),
       ),
       StoreTabData(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              '이',
-              style: TextStyle(
-                fontSize: 14,
-                color: Color.fromRGBO(250, 157, 43, 1.0),
-              ),
-            ),
-            Text(
-              '마트',
-              style: TextStyle(
-                fontSize: 14,
-                color: Color.fromRGBO(62, 61, 61, 1.0),
-              ),
-            ),
-            Text(
-              '24',
-              style: TextStyle(
-                fontSize: 14,
-                color: Color.fromRGBO(250, 157, 43, 1.0),
-              ),
-            ),
-          ],
-        ),
+        title: StoreLabel.of(StoreType.emart24),
         color: const Color.fromRGBO(255, 245, 228, 1.0),
       ),
       StoreTabData(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              '세븐일레븐',
-              style: TextStyle(
-                color: Color.fromRGBO(32, 116, 41, 1.0),
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
+        title: StoreLabel.of(StoreType.sevenEleven),
         color: const Color.fromRGBO(229, 240, 230, 1.0),
       ),
       StoreTabData(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              '미니스톱',
-              style: TextStyle(
-                color: Color.fromRGBO(5, 38, 118, 1.0),
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
+        title: StoreLabel.of(StoreType.ministop),
         color: const Color.fromRGBO(225, 230, 240, 1.0),
       ),
     ];
