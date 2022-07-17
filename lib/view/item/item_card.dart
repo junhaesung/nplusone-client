@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nplusone/adapter/api/dto/item_response.dart';
+import 'package:nplusone/domain/store_type.dart';
+import 'package:nplusone/view/store/store_label.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard(
@@ -30,7 +32,7 @@ class ItemCard extends StatelessWidget {
               },
             ),
           ),
-          Text(itemResponse.storeType),
+          StoreLabel.of(StoreType.fromQueryName(itemResponse.storeType)),
           Text(itemResponse.name),
           Text("${itemResponse.price}원"),
           Text(itemResponse.discountType),
