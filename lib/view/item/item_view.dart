@@ -89,7 +89,7 @@ class _ItemViewState extends State<ItemView> {
               Expanded(
                 child: GridView.count(
                   crossAxisCount: 2,
-                  childAspectRatio: 90 / 120,
+                  childAspectRatio: 90 / 130,
                   // crossAxisSpacing: 12,
                   shrinkWrap: true,
                   physics: const ScrollPhysics(),

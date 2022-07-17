@@ -7,7 +7,8 @@ import 'package:nplusone/view/nplusone_formatter.dart';
 import 'package:nplusone/view/store/store_label.dart';
 
 class ItemCard extends StatelessWidget {
-  const ItemCard(this.itemResponse, {
+  const ItemCard(
+    this.itemResponse, {
     Key? key,
   }) : super(key: key);
   final ItemResponse itemResponse;
@@ -21,18 +22,21 @@ class ItemCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-            child: Image.network(
-              itemResponse.imageUrl!,
-              height: 150,
-              errorBuilder: (context, error, stackTrace) {
-                if (kDebugMode) {
-                  print("error: $error");
-                  print("stackTrace: $stackTrace");
-                }
-                return const SizedBox(
-                  height: 150,
-                );
-              },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                itemResponse.imageUrl!,
+                height: 180,
+                errorBuilder: (context, error, stackTrace) {
+                  if (kDebugMode) {
+                    print("error: $error");
+                    print("stackTrace: $stackTrace");
+                  }
+                  return const SizedBox(
+                    height: 180,
+                  );
+                },
+              ),
             ),
           ),
           StoreLabel.of(
@@ -71,8 +75,7 @@ class ItemCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: const Color.fromRGBO(245, 242, 255, 1.0)
-      ),
+          color: const Color.fromRGBO(245, 242, 255, 1.0)),
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Text(
