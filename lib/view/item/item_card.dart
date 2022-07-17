@@ -1,15 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:nplusone/adapter/api/dto/item_response.dart';
 import 'package:nplusone/domain/store_type.dart';
 import 'package:nplusone/view/store/store_label.dart';
 
 class ItemCard extends StatelessWidget {
-  const ItemCard(
+  ItemCard(
     this.itemResponse, {
     Key? key,
   }) : super(key: key);
   final ItemResponse itemResponse;
+
+  final _currencyFormatter = NumberFormat.simpleCurrency(
+    locale: 'ko_KR',
+    name: '',
+    decimalDigits: 0,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +41,7 @@ class ItemCard extends StatelessWidget {
           ),
           StoreLabel.of(StoreType.fromQueryName(itemResponse.storeType)),
           Text(itemResponse.name),
-          Text("${itemResponse.price}원"),
+          Text("${_currencyFormatter.format(double.parse(itemResponse.price).toInt())}원"),
           Text(itemResponse.discountType),
         ],
       ),
