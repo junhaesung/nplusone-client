@@ -28,20 +28,23 @@ class _ItemViewState extends State<ItemView> {
         child: Column(
           children: [
             TabBar(
-                isScrollable: true,
-                onTap: (value) {
-                  setState(() {
-                    storeTab = StoreTab.values[value];
-                  });
-                },
-                tabs: StoreTab.values
-                    .map((e) => Tab(
-                          child: Text(
-                            e.getName(),
-                            style: const TextStyle(color: Colors.black54),
-                          ),
-                        ))
-                    .toList()),
+              isScrollable: true,
+              onTap: (value) {
+                setState(() {
+                  storeTab = StoreTab.values[value];
+                });
+              },
+              tabs: StoreTab.values
+                  .map((e) => Tab(
+                        child: Text(
+                          e.getName(),
+                          style: const TextStyle(color: Colors.black54),
+                        ),
+                      ))
+                  .toList(),
+              indicatorColor: const Color.fromRGBO(45, 00, 255, 1.0),
+              indicatorWeight: 3.0,
+            ),
             Expanded(
               child: FutureBuilder<ApiResponse<List<ItemResponse>>>(
                 future: api.getItems(
