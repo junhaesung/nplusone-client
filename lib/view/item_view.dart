@@ -4,6 +4,7 @@ import 'package:nplusone/adapter/api/dto/api_response.dart';
 import 'package:nplusone/adapter/api/dto/item_response.dart';
 import 'package:nplusone/adapter/api/nplusone_api.dart';
 import 'package:nplusone/domain/store_type.dart';
+import 'package:nplusone/view/appbar/nplusone_app_bar.dart';
 import 'package:nplusone/view/navigation/bottom_tab_bar.dart';
 
 class ItemView extends StatefulWidget {
@@ -21,25 +22,7 @@ class _ItemViewState extends State<ItemView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(
-          Icons.menu,
-          color: Colors.black54,
-        ),
-        title: const Text('상품'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.notifications_outlined,
-              color: Colors.black54,
-            ),
-          ),
-        ],
-        backgroundColor: Colors.transparent,
-        // Remove shadow
-        elevation: 0,
-      ),
+      appBar: NplusoneAppBar.item(),
       body: DefaultTabController(
         length: 6,
         child: Column(

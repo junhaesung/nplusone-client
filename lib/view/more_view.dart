@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nplusone/view/appbar/nplusone_app_bar.dart';
 import 'package:nplusone/view/navigation/bottom_tab_bar.dart';
 
 class MoreView extends StatelessWidget {
@@ -7,9 +8,7 @@ class MoreView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('더보기'),
-      ),
+      appBar: NplusoneAppBar.more(),
       body: Container(),
       bottomNavigationBar: const BottomTabBar(),
     );
