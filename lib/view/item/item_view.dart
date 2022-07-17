@@ -24,7 +24,7 @@ class _ItemViewState extends State<ItemView> {
     return Scaffold(
       appBar: NplusoneAppBar.item(),
       body: DefaultTabController(
-        length: 6,
+        length: StoreTab.values.length,
         child: Column(
           children: [
             TabBar(
