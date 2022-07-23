@@ -16,6 +16,7 @@ class NplusoneApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          fontFamily: 'Pretendard',
         ),
         home: const TabPageNavigator(),
       ),
