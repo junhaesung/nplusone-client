@@ -1,4 +1,5 @@
 class ItemResponse {
+  final int itemDetailId;
   final int itemId;
   final String name;
   final String price;
@@ -8,6 +9,7 @@ class ItemResponse {
   final String referenceDate;
 
   const ItemResponse(
+    this.itemDetailId,
     this.itemId,
     this.name,
     this.price,
@@ -21,6 +23,7 @@ class ItemResponse {
     Map<String, dynamic> json,
   ) =>
       ItemResponse(
+        json['itemDetailId'],
         json['itemId'],
         json['name'],
         json['price'].toString(),
@@ -32,6 +35,6 @@ class ItemResponse {
 
   @override
   String toString() {
-    return 'ItemResponse{itemId: $itemId, name: $name, price: $price, imageUrl: $imageUrl, discountType: $discountType, storeType: $storeType, referenceDate: $referenceDate}';
+    return 'ItemResponse{itemDetailId: $itemDetailId, itemId: $itemId, name: $name, price: $price, imageUrl: $imageUrl, discountType: $discountType, storeType: $storeType, referenceDate: $referenceDate}';
   }
 }
