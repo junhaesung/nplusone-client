@@ -98,7 +98,7 @@ class _ItemViewState extends State<ItemView> with SingleTickerProviderStateMixin
         final itemResponses = snapshot.data!.data!;
         final totalCount = itemResponses.length;
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -127,8 +127,9 @@ class _ItemViewState extends State<ItemView> with SingleTickerProviderStateMixin
                 child: GridView.count(
                   controller: _scrollController,
                   crossAxisCount: 2,
-                  childAspectRatio: 90 / 150,
-                  // crossAxisSpacing: 12,
+                  childAspectRatio: 90 / 160,
+                  mainAxisSpacing: 12.0,
+                  crossAxisSpacing: 12.0,
                   shrinkWrap: true,
                   physics: const ScrollPhysics(),
                   children: itemResponses.map((e) => ItemCard(e)).toList(),
