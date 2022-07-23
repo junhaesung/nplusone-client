@@ -45,7 +45,10 @@ class NplusoneAppBar {
           ),
       title: Text(
         title ?? '불-편',
-        style: const TextStyle(color: Colors.black54),
+        style: const TextStyle(
+          color: Colors.black,
+          fontFamily: 'BmDohyeon',
+        ),
       ),
       centerTitle: true,
       actions: [
