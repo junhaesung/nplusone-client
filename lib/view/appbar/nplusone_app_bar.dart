@@ -17,15 +17,35 @@ class NplusoneAppBar {
     return _default();
   }
 
-  static PreferredSizeWidget _default() {
-    return AppBar(
-      leading: const Icon(
-        Icons.menu,
+  static PreferredSizeWidget recommend(
+    BuildContext context, {
+    String? title,
+  }) {
+    return _default(
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
         color: Colors.black54,
       ),
-      title: const Text(
-        '불-편',
-        style: TextStyle(color: Colors.black54),
+      title: title,
+    );
+  }
+
+  static PreferredSizeWidget _default({
+    Widget? leading,
+    String? title,
+  }) {
+    return AppBar(
+      leading: leading ??
+          const Icon(
+            Icons.menu,
+            color: Colors.black54,
+          ),
+      title: Text(
+        title ?? '불-편',
+        style: const TextStyle(color: Colors.black54),
       ),
       centerTitle: true,
       actions: [
