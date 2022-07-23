@@ -6,6 +6,7 @@ import 'package:nplusone/adapter/api/dto/search_word_response.dart';
 import 'package:nplusone/adapter/api/nplusone_api.dart';
 import 'package:nplusone/view/appbar/nplusone_app_bar.dart';
 import 'package:nplusone/view/navigation/bottom_tab_bar.dart';
+import 'package:nplusone/view/search/result/search_result_view.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);
@@ -32,10 +33,10 @@ class SearchViewState extends State<SearchView> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             // loading
-            return getSearchTextField();
+            return getSearchTextField(context);
           }
           final widgets = [
-            getSearchTextField(),
+            getSearchTextField(context),
             getRecentSearchWords((snapshot.requireData as List)[0]),
             getPopularSearchWords((snapshot.requireData as List)[1]),
           ];
@@ -53,7 +54,7 @@ class SearchViewState extends State<SearchView> {
 
   /// 검색
   /// TODO: 둥글게 만들기, 검색아이콘
-  Widget getSearchTextField() {
+  Widget getSearchTextField(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
@@ -61,6 +62,11 @@ class SearchViewState extends State<SearchView> {
           final searchWord = value.trim();
           if (kDebugMode) {
             print('onFieldSubmitted: $searchWord');
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => SearchResultView(searchWord: searchWord),
+              ),
+            );
           }
           // api call
           final apiResponse = await api
@@ -155,7 +161,8 @@ class SearchViewState extends State<SearchView> {
             ),
           ),
           ListView.separated(
-            separatorBuilder: (BuildContext context, int index) => const Divider(),
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: searchWords.length,

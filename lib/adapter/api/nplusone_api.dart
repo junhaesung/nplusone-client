@@ -63,6 +63,7 @@ class NplusoneApi {
   Future<ApiResponse<List<ItemResponse>>> search({
     String? searchWord,
     StoreType? storeType,
+    DiscountType? discountType,
     int offsetId = 0,
     int size = 20,
   }) async {
@@ -75,7 +76,8 @@ class NplusoneApi {
             },
             body: json.encode({
               'searchWord': searchWord,
-              'storeType': storeType?.getName(),
+              'storeType': storeType?.getQueryName(),
+              'discountType': discountType?.getQueryName(),
               'offsetId': offsetId,
               'pageSize': size,
             }))
