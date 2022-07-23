@@ -22,7 +22,6 @@ class ItemView extends StatefulWidget {
 
 class _ItemViewState extends State<ItemView>
     with SingleTickerProviderStateMixin {
-
   // TODO: dependency injection
   final _api = const NplusoneApi();
   late final TabController _tabController =
@@ -30,13 +29,13 @@ class _ItemViewState extends State<ItemView>
   final StreamController<ItemStoreTab> _streamController =
       StreamController.broadcast();
 
-  late ItemStoreTab itemStoreTab;
+  late ItemStoreTab _itemStoreTab;
 
   @override
   void initState() {
     super.initState();
-    itemStoreTab = ItemStoreTab.from(widget.storeType);
-    _tabController.index = itemStoreTab.index;
+    _itemStoreTab = ItemStoreTab.from(widget.storeType);
+    _tabController.index = _itemStoreTab.index;
   }
 
   @override
@@ -51,12 +50,12 @@ class _ItemViewState extends State<ItemView>
               controller: _tabController,
               isScrollable: true,
               onTap: (value) {
-                if (value == itemStoreTab.index) {
+                if (value == _itemStoreTab.index) {
                   return;
                 }
                 setState(() {
-                  itemStoreTab = ItemStoreTab.values[value];
-                  _streamController.add(itemStoreTab);
+                  _itemStoreTab = ItemStoreTab.values[value];
+                  _streamController.add(_itemStoreTab);
                 });
               },
               tabs: ItemStoreTab.values
@@ -76,7 +75,7 @@ class _ItemViewState extends State<ItemView>
               ),
             ),
             Expanded(
-              child: _buildWithoutFuture(),
+              child: _buildItemGridView(),
             ),
           ],
         ),
@@ -85,10 +84,10 @@ class _ItemViewState extends State<ItemView>
     );
   }
 
-  Widget _buildWithoutFuture() {
+  Widget _buildItemGridView() {
     return FutureBuilder(
         future: _api.getItems(
-          storeType: itemStoreTab.toStoreType(),
+          storeType: _itemStoreTab.toStoreType(),
           size: 10,
         ),
         builder: (
@@ -107,51 +106,12 @@ class _ItemViewState extends State<ItemView>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      '전체',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(width: 4.0),
-                    FutureBuilder(
-                        future: _api.countItems(
-                          storeType: itemStoreTab.toStoreType(),
-                          size: 1,
-                        ),
-                        builder: (context,
-                            AsyncSnapshot<ApiResponse<int?>> snapshot) {
-                          late String totalCount;
-                          if (snapshot.connectionState ==
-                                  ConnectionState.none ||
-                              snapshot.connectionState ==
-                                  ConnectionState.waiting ||
-                              !snapshot.hasData ||
-                              snapshot.hasError) {
-                            totalCount = '';
-                          } else {
-                            totalCount = '${snapshot.data!.data!}';
-                          }
-                          return Text(
-                            totalCount,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              color: NplusoneColors.purple,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          );
-                        }),
-                  ],
-                ),
+                _getCountTextWidget(),
                 const SizedBox(height: 16.0),
                 Expanded(
                   child: ItemGridView(
                     items: snapshot.data!.data!,
-                    storeType: itemStoreTab.toStoreType(),
+                    storeType: _itemStoreTab.toStoreType(),
                     stream: _streamController.stream,
                   ),
                 ),
@@ -159,6 +119,47 @@ class _ItemViewState extends State<ItemView>
             ),
           );
         });
+  }
+
+  /// 전체 n개
+  Widget _getCountTextWidget() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Text(
+          '전체',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(width: 4.0),
+        FutureBuilder(
+            future: _api.countItems(
+              storeType: _itemStoreTab.toStoreType(),
+              size: 1,
+            ),
+            builder: (context, AsyncSnapshot<ApiResponse<int?>> snapshot) {
+              late String totalCount;
+              if (snapshot.connectionState == ConnectionState.none ||
+                  snapshot.connectionState == ConnectionState.waiting ||
+                  !snapshot.hasData ||
+                  snapshot.hasError) {
+                totalCount = '';
+              } else {
+                totalCount = '${snapshot.data!.data!}';
+              }
+              return Text(
+                totalCount,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: NplusoneColors.purple,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            }),
+      ],
+    );
   }
 
   @override
