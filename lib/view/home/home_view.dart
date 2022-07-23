@@ -64,7 +64,7 @@ class HomeView extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GridView.count(
         crossAxisCount: 5,
-        childAspectRatio: 10 / 12,
+        childAspectRatio: 10 / 13,
         shrinkWrap: true,
         children: tabData
             .map((e) => Padding(
@@ -80,6 +80,7 @@ class HomeView extends StatelessWidget {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 4.0),
                       e.title,
                     ],
                   ),
