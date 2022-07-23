@@ -49,15 +49,20 @@ class _ItemViewState extends State<ItemView> {
                 });
               },
               tabs: _StoreTab.values
-                  .map((e) => Tab(
-                        child: Text(
-                          e.getName(),
-                          style: const TextStyle(color: Colors.black54),
-                        ),
-                      ))
+                  .map((e) => Tab(child: Text(e.getName())))
                   .toList(),
               indicatorColor: NplusoneColors.purple,
               indicatorWeight: 3.0,
+              indicatorSize: TabBarIndicatorSize.label,
+              labelColor: NplusoneColors.purple,
+              labelStyle: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              unselectedLabelColor: Colors.black54,
+              unselectedLabelStyle: const TextStyle(
+                fontSize: 15,
+              ),
             ),
             Expanded(
               child: _buildWithFutureBuilder(),
