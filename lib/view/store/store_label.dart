@@ -32,12 +32,14 @@ class StoreLabel {
           text: 'GS',
           style: TextStyle(
             color: Color.fromRGBO(14, 99, 175, 1.0),
+            fontWeight: FontWeight.w600,
           ),
         ),
         TextSpan(
           text: '25',
           style: TextStyle(
             color: Color.fromRGBO(42, 176, 211, 1.0),
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],
@@ -50,6 +52,7 @@ class StoreLabel {
       style: TextStyle(
         color: const Color.fromRGBO(160, 199, 59, 1.0),
         fontSize: fontSize,
+        fontWeight: FontWeight.w600,
       ),
     ));
   }
@@ -64,18 +67,21 @@ class StoreLabel {
           text: '이',
           style: TextStyle(
             color: Color.fromRGBO(250, 157, 43, 1.0),
+            fontWeight: FontWeight.w600,
           ),
         ),
         TextSpan(
           text: '마트',
           style: TextStyle(
             color: Color.fromRGBO(62, 61, 61, 1.0),
+            fontWeight: FontWeight.w600,
           ),
         ),
         TextSpan(
           text: '24',
           style: TextStyle(
             color: Color.fromRGBO(250, 157, 43, 1.0),
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],
@@ -88,6 +94,7 @@ class StoreLabel {
       style: TextStyle(
         color: const Color.fromRGBO(32, 116, 41, 1.0),
         fontSize: fontSize,
+        fontWeight: FontWeight.w600,
       ),
     ));
   }
@@ -98,6 +105,7 @@ class StoreLabel {
       style: TextStyle(
         color: const Color.fromRGBO(5, 38, 118, 1.0),
         fontSize: fontSize,
+        fontWeight: FontWeight.w600,
       ),
     ));
   }
