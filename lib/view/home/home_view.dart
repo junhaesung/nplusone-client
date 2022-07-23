@@ -61,7 +61,7 @@ class HomeView extends StatelessWidget {
       ),
     ];
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.all(8.0),
       child: GridView.count(
         crossAxisCount: 5,
         childAspectRatio: 10 / 12,
@@ -92,36 +92,39 @@ class HomeView extends StatelessWidget {
   Widget _getRecommendedItems(BuildContext context) {
     const label = '추천 1+1 제품';
     return Padding(
-      padding: const EdgeInsets.only(left: 4.0),
+      padding: const EdgeInsets.only(left: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Text(
-                label,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const RecommendView(title: label),
-                    ),
-                  );
-                },
-                child: const Text(
-                  '전체보기',
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Row(
+              children: [
+                const Text(
+                  label,
                   style: TextStyle(
-                    color: Color.fromRGBO(112, 112, 112, 1.0),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            ],
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const RecommendView(title: label),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    '전체보기',
+                    style: TextStyle(
+                      color: Color.fromRGBO(112, 112, 112, 1.0),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 240,
