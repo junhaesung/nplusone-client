@@ -123,6 +123,7 @@ class _ItemViewState extends State<ItemView> with SingleTickerProviderStateMixin
                   ),
                 ],
               ),
+              const SizedBox(height: 16.0),
               Expanded(
                 child: GridView.count(
                   controller: _scrollController,
