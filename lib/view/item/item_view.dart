@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nplusone/adapter/api/dto/api_response.dart';
 import 'package:nplusone/adapter/api/dto/item_response.dart';
@@ -45,7 +44,8 @@ class _ItemViewState extends State<ItemView> {
               onTap: (value) {
                 setState(() {
                   storeTab = _StoreTab.values[value];
-                  _scrollController.jumpTo(_scrollController.position.minScrollExtent);
+                  _scrollController
+                      .jumpTo(_scrollController.position.minScrollExtent);
                 });
               },
               tabs: _StoreTab.values
@@ -94,7 +94,27 @@ class _ItemViewState extends State<ItemView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("전체: $totalCount"),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    '전체',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(width: 4.0),
+                  Text(
+                    '$totalCount',
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: NplusoneColors.purple,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
               Expanded(
                 child: GridView.count(
                   controller: _scrollController,
