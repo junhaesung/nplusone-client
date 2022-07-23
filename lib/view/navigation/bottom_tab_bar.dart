@@ -29,7 +29,7 @@ class BottomTabBar extends StatelessWidget {
               label: 'More',
             ),
           ],
-          currentIndex: state.index,
+          currentIndex: state.tabIndex,
           onTap: (int index) {
             if (index == 0) {
               context.read<TabPageCubit>().showHomePage();

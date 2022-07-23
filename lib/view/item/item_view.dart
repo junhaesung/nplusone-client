@@ -9,26 +9,33 @@ import 'package:nplusone/view/navigation/bottom_tab_bar.dart';
 import 'package:nplusone/view/nplusone_colors.dart';
 
 class ItemView extends StatefulWidget {
-  const ItemView({Key? key}) : super(key: key);
+  const ItemView({Key? key, this.storeType}) : super(key: key);
+
+  final StoreType? storeType;
 
   @override
-  State<StatefulWidget> createState() => _ItemViewState();
+  State<StatefulWidget> createState() => _ItemViewState(storeType);
 }
 
-class _ItemViewState extends State<ItemView> {
+class _ItemViewState extends State<ItemView> with SingleTickerProviderStateMixin {
+  _ItemViewState(this.storeType);
+
   // TODO: dependency injection
   final _api = const NplusoneApi();
   final Map<_StoreTab, int> offsetIdMap = {
     for (final e in _StoreTab.values) e: 0
   };
-
-  _StoreTab storeTab = _StoreTab.all;
   final ScrollController _scrollController = ScrollController();
+  late final TabController _tabController = TabController(length: 6, vsync: this);
+
+  StoreType? storeType;
+  late _StoreTab storeTab;
 
   @override
   void initState() {
     super.initState();
-    storeTab = _StoreTab.all;
+    storeTab = _StoreTab.from(storeType);
+    _tabController.index = storeTab.index;
   }
 
   @override
@@ -40,6 +47,7 @@ class _ItemViewState extends State<ItemView> {
         child: Column(
           children: [
             TabBar(
+              controller: _tabController,
               isScrollable: true,
               onTap: (value) {
                 setState(() {
@@ -142,6 +150,23 @@ enum _StoreTab {
   sevenEleven,
   ministop,
   ;
+
+  factory _StoreTab.from(StoreType? storeType) {
+    switch(storeType) {
+      case StoreType.cu:
+        return _StoreTab.cu;
+      case StoreType.gs25:
+        return _StoreTab.gs25;
+      case StoreType.emart24:
+        return _StoreTab.emart24;
+      case StoreType.sevenEleven:
+        return _StoreTab.sevenEleven;
+      case StoreType.ministop:
+        return _StoreTab.ministop;
+      default:
+        return _StoreTab.all;
+    }
+  }
 
   String getName() {
     switch (this) {
