@@ -87,7 +87,7 @@ class _ItemViewState extends State<ItemView> with SingleTickerProviderStateMixin
     return FutureBuilder<ApiResponse<List<ItemResponse>>>(
       future: _api.getItems(
         storeType: storeTab.toStoreType(),
-        size: 10000,
+        size: 20,
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.none ||
@@ -96,7 +96,7 @@ class _ItemViewState extends State<ItemView> with SingleTickerProviderStateMixin
           return Container();
         }
         final itemResponses = snapshot.data!.data!;
-        final totalCount = itemResponses.length;
+        final totalCount = snapshot.data!.totalCount ?? itemResponses.length;
         return Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -113,13 +113,29 @@ class _ItemViewState extends State<ItemView> with SingleTickerProviderStateMixin
                     ),
                   ),
                   const SizedBox(width: 4.0),
-                  Text(
-                    '$totalCount',
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: NplusoneColors.purple,
-                      fontWeight: FontWeight.bold,
+                  FutureBuilder(
+                    future: _api.countItems(
+                      storeType: storeTab.toStoreType(),
+                      size: 20,
                     ),
+                    builder: (context, AsyncSnapshot<ApiResponse<int?>> snapshot) {
+                      late String totalCount;
+                      if (snapshot.connectionState == ConnectionState.none ||
+                          snapshot.connectionState == ConnectionState.waiting ||
+                          !snapshot.hasData) {
+                        totalCount = '';
+                      } else {
+                        totalCount = '${snapshot.data!.data!}';
+                      }
+                      return Text(
+                        totalCount,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: NplusoneColors.purple,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    }
                   ),
                 ],
               ),
