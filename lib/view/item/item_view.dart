@@ -141,6 +141,13 @@ class _ItemViewState extends State<ItemView> with SingleTickerProviderStateMixin
       },
     );
   }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _tabController.dispose();
+    super.dispose();
+  }
 }
 
 enum _StoreTab {

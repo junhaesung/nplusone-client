@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nplusone/domain/store_type.dart';
 
 class StoreLabel {
-  static const double defaultFontSize = 14;
+  static const double defaultFontSize = 11;
 
   static Widget of(
     StoreType storeType, {
