@@ -7,6 +7,7 @@ import 'package:nplusone/adapter/api/dto/login_response.dart';
 import 'package:nplusone/adapter/api/dto/search_history_response.dart';
 import 'package:nplusone/adapter/api/dto/search_word_response.dart';
 import 'package:nplusone/adapter/storage/token_storage_api.dart';
+import 'package:nplusone/domain/discount_type.dart';
 import 'package:nplusone/domain/store_type.dart';
 
 class NplusoneApi {
@@ -118,5 +119,27 @@ class NplusoneApi {
         )
         .then((value) => json.decode(utf8.decode(value.bodyBytes)))
         .then((value) => ApiResponse.searchWordResponse(value));
+  }
+
+  /// 추천
+  Future<ApiResponse<List<ItemResponse>>> getRecommendedItems({
+    StoreType? storeType,
+    DiscountType? discountType,
+  }) async {
+    final accessToken = await _tokenStorageApi.read();
+    return http
+        .post(
+          Uri.http(_host, '/api/v1/recommend'),
+          headers: {
+            'Authorization': 'Bearer $accessToken',
+            'Content-Type': 'application/json',
+          },
+          body: json.encode({
+            'storeType': storeType?.getQueryName(),
+            'discountType': discountType?.getQueryName(),
+          }),
+        )
+        .then((value) => json.decode(utf8.decode(value.bodyBytes)))
+        .then((value) => ApiResponse.itemResponses(value));
   }
 }
