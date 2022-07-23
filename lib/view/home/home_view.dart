@@ -141,7 +141,7 @@ class HomeView extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   children: itemResponses
-                      .map((e) => ItemCard(e, imageHeight: 140))
+                      .map((e) => ItemCard(e, imageHeight: 120))
                       .toList(),
                 );
               },
