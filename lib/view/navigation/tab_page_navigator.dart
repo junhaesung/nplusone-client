@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nplusone/view/home_view.dart';
-import 'package:nplusone/view/more_view.dart';
+import 'package:nplusone/view/home/home_view.dart';
+import 'package:nplusone/view/more/more_view.dart';
 import 'package:nplusone/view/navigation/tab_page_cubit.dart';
-import 'package:nplusone/view/search_view.dart';
-import 'package:nplusone/view/item_view.dart';
+import 'package:nplusone/view/search/search_view.dart';
+import 'package:nplusone/view/item/item_view.dart';
 
 class TabPageNavigator extends StatelessWidget {
   const TabPageNavigator({Key? key}) : super(key: key);

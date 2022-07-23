@@ -6,6 +6,23 @@ enum StoreType {
   ministop,
   ;
 
+  static StoreType fromQueryName(String value) {
+    switch (value) {
+      case 'GS25':
+        return StoreType.gs25;
+      case 'CU':
+        return StoreType.cu;
+      case 'SEVEN_ELEVEN':
+        return StoreType.sevenEleven;
+      case 'EMART24':
+        return StoreType.emart24;
+      case 'MINISTOP':
+        return StoreType.ministop;
+      default:
+        throw Exception('Failed to parse storeType. value:$value');
+    }
+  }
+
   String getName() {
     switch(this) {
       case StoreType.gs25:
