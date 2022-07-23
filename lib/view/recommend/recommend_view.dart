@@ -23,27 +23,31 @@ class RecommendView extends StatelessWidget {
         context,
         title: title,
       ),
-      body: FutureBuilder(
-        future: _api.getRecommendedItems(
-          discountType: DiscountType.onePlusOne,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: FutureBuilder(
+          future: _api.getRecommendedItems(
+            discountType: DiscountType.onePlusOne,
+          ),
+          builder:
+              (context, AsyncSnapshot<ApiResponse<List<ItemResponse>>> snapshot) {
+            if (!snapshot.hasData) {
+              // TODO: loading progress
+              return Container();
+            }
+            return GridView.count(
+              crossAxisCount: 2,
+              childAspectRatio: 90 / 150,
+              mainAxisSpacing: 12.0,
+              crossAxisSpacing: 12.0,
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              children: snapshot.data!.data!
+                  .map((e) => ItemCard(e, imageHeight: 180))
+                  .toList(),
+            );
+          },
         ),
-        builder:
-            (context, AsyncSnapshot<ApiResponse<List<ItemResponse>>> snapshot) {
-          if (!snapshot.hasData) {
-            // TODO: loading progress
-            return Container();
-          }
-          return GridView.count(
-            crossAxisCount: 2,
-            childAspectRatio: 90 / 130,
-            // crossAxisSpacing: 12,
-            shrinkWrap: true,
-            physics: const ScrollPhysics(),
-            children: snapshot.data!.data!
-                .map((e) => ItemCard(e, imageHeight: 180))
-                .toList(),
-          );
-        },
       ),
     );
   }

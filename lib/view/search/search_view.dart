@@ -55,7 +55,7 @@ class SearchViewState extends State<SearchView> {
   /// TODO: 둥글게 만들기, 검색아이콘
   Widget getSearchTextField() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: TextFormField(
         onFieldSubmitted: (value) async {
           final searchWord = value.trim();
@@ -86,7 +86,7 @@ class SearchViewState extends State<SearchView> {
     }
     final searchWords = apiResponse.data!;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -144,7 +144,7 @@ class SearchViewState extends State<SearchView> {
     }
     final searchWords = apiResponse.data!;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -68,36 +68,34 @@ class HomeView extends StatelessWidget {
       ),
     ];
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: GridView.count(
         crossAxisCount: 5,
         childAspectRatio: 10 / 13,
+        crossAxisSpacing: 7.0,
         shrinkWrap: true,
         children: tabData
-            .map((e) => Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      // move to item view
-                      context.read<TabPageCubit>().showItemPage(
-                            storeType: e.storeType,
-                          );
-                    },
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: Container(
-                              color: e.color,
-                            ),
+            .map((e) => GestureDetector(
+                  onTap: () {
+                    // move to item view
+                    context.read<TabPageCubit>().showItemPage(
+                          storeType: e.storeType,
+                        );
+                  },
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Container(
+                            color: e.color,
                           ),
                         ),
-                        const SizedBox(height: 4.0),
-                        e.title,
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 4.0),
+                      e.title,
+                    ],
                   ),
                 ))
             .toList(),
@@ -108,12 +106,12 @@ class HomeView extends StatelessWidget {
   Widget _getRecommendedItems(BuildContext context) {
     const label = '추천 1+1 제품';
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
+      padding: const EdgeInsets.only(left: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.only(right: 16.0),
             child: Row(
               children: [
                 const Text(
@@ -173,7 +171,7 @@ class HomeView extends StatelessWidget {
 
   Widget _getBannerWidget() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
         height: 100,
         color: const Color.fromRGBO(222, 222, 222, 1.0),
