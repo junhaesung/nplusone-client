@@ -9,6 +9,7 @@ class ApiResponse<T> {
   T? data;
   bool? hasNext;
   int? offsetId;
+  int? totalCount;
 
   ApiResponse({
     required this.code,
@@ -16,6 +17,7 @@ class ApiResponse<T> {
     this.data,
     this.hasNext,
     this.offsetId,
+    this.totalCount,
   });
 
   static ApiResponse emptyData(Map<String, dynamic> json) {
@@ -44,6 +46,7 @@ class ApiResponse<T> {
           : null,
       hasNext: json['hasNext'],
       offsetId: json['offsetId'],
+      totalCount: json['totalCount'],
     );
   }
 
@@ -72,6 +75,18 @@ class ApiResponse<T> {
           ? (json['data'] as List)
               .map((e) => SearchWordResponse.fromJson(e))
               .toList()
+          : null,
+    );
+  }
+
+  static ApiResponse<int?> itemCountResponse(
+    Map<String, dynamic> json,
+  ) {
+    return ApiResponse(
+      code: json['code'] as String,
+      message: json['message'] as String,
+      data: json['data'] != null
+          ? (json['data'] as int)
           : null,
     );
   }

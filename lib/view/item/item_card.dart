@@ -20,6 +20,7 @@ class ItemCard extends StatelessWidget {
     final price = NplusoneFormatter.formatCurrency(
         double.parse(itemResponse.price).toInt());
     return Card(
+      elevation: 0.0,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -53,6 +54,7 @@ class ItemCard extends StatelessWidget {
               itemResponse.name,
               style: const TextStyle(
                 fontSize: 13,
+                fontWeight: FontWeight.normal,
               ),
               overflow: TextOverflow.ellipsis,
             ),

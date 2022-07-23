@@ -142,4 +142,31 @@ class NplusoneApi {
         .then((value) => json.decode(utf8.decode(value.bodyBytes)))
         .then((value) => ApiResponse.itemResponses(value));
   }
+
+  Future<ApiResponse<int?>> countItems({
+    String? name,
+    StoreType? storeType,
+    int offsetId = 0,
+    int size = 20,
+  }) async {
+    final accessToken = await _tokenStorageApi.read();
+    final queryParameterMap = <String, dynamic>{};
+    if (name != null && name.isNotEmpty) {
+      queryParameterMap['name'] = name;
+    }
+    if (storeType != null) {
+      queryParameterMap['storeType'] = storeType.getQueryName();
+    }
+    queryParameterMap['offsetId'] = offsetId.toString();
+    queryParameterMap['pageSize'] = size.toString();
+    return http
+        .post(
+          Uri.http(_host, '/api/v1/items/count', queryParameterMap),
+          headers: {
+            'Authorization': 'Bearer $accessToken',
+          },
+        )
+        .then((value) => json.decode(utf8.decode(value.bodyBytes)))
+        .then((value) => ApiResponse.itemCountResponse(value));
+  }
 }
