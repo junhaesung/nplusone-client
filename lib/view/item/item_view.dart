@@ -24,6 +24,7 @@ class _ItemViewState extends State<ItemView> {
   };
 
   _StoreTab storeTab = _StoreTab.all;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -44,6 +45,7 @@ class _ItemViewState extends State<ItemView> {
               onTap: (value) {
                 setState(() {
                   storeTab = _StoreTab.values[value];
+                  _scrollController.jumpTo(_scrollController.position.minScrollExtent);
                 });
               },
               tabs: _StoreTab.values
@@ -75,7 +77,9 @@ class _ItemViewState extends State<ItemView> {
         size: 10000,
       ),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.none ||
+            snapshot.connectionState == ConnectionState.waiting ||
+            !snapshot.hasData) {
           return Container();
         }
         final itemResponses = snapshot.data!.data!;
@@ -88,6 +92,7 @@ class _ItemViewState extends State<ItemView> {
               Text("전체: $totalCount"),
               Expanded(
                 child: GridView.count(
+                  controller: _scrollController,
                   crossAxisCount: 2,
                   childAspectRatio: 90 / 150,
                   // crossAxisSpacing: 12,
