@@ -9,9 +9,11 @@ import 'package:nplusone/view/store/store_label.dart';
 class ItemCard extends StatelessWidget {
   const ItemCard(
     this.itemResponse, {
+    this.imageHeight = 180,
     Key? key,
   }) : super(key: key);
   final ItemResponse itemResponse;
+  final double imageHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +28,14 @@ class ItemCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: Image.network(
                 itemResponse.imageUrl!,
-                height: 180,
+                height: imageHeight,
                 errorBuilder: (context, error, stackTrace) {
                   if (kDebugMode) {
                     print("error: $error");
                     print("stackTrace: $stackTrace");
                   }
-                  return const SizedBox(
-                    height: 180,
+                  return SizedBox(
+                    height: imageHeight,
                   );
                 },
               ),
@@ -48,6 +50,7 @@ class ItemCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 13,
             ),
+            overflow: TextOverflow.ellipsis,
           ),
           Text(
             '$price원',
