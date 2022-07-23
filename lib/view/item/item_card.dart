@@ -9,7 +9,7 @@ import 'package:nplusone/view/store/store_label.dart';
 class ItemCard extends StatelessWidget {
   const ItemCard(
     this.itemResponse, {
-    this.imageHeight = 180,
+    this.imageHeight = 200,
     Key? key,
   }) : super(key: key);
   final ItemResponse itemResponse;
@@ -20,47 +20,54 @@ class ItemCard extends StatelessWidget {
     final price = NplusoneFormatter.formatCurrency(
         double.parse(itemResponse.price).toInt());
     return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                itemResponse.imageUrl!,
-                height: imageHeight,
-                errorBuilder: (context, error, stackTrace) {
-                  if (kDebugMode) {
-                    print("error: $error");
-                    print("stackTrace: $stackTrace");
-                  }
-                  return SizedBox(
-                    height: imageHeight,
-                  );
-                },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  itemResponse.imageUrl!,
+                  height: imageHeight,
+                  errorBuilder: (context, error, stackTrace) {
+                    if (kDebugMode) {
+                      print("error: $error");
+                      print("stackTrace: $stackTrace");
+                    }
+                    return SizedBox(
+                      height: imageHeight,
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-          StoreLabel.of(
-            StoreType.fromQueryName(itemResponse.storeType),
-            fontSize: 11,
-          ),
-          Text(
-            itemResponse.name,
-            style: const TextStyle(
-              fontSize: 13,
+            const SizedBox(height: 6),
+            StoreLabel.of(
+              StoreType.fromQueryName(itemResponse.storeType),
+              fontSize: 11,
             ),
-            overflow: TextOverflow.ellipsis,
-          ),
-          Text(
-            '$price원',
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
+            const SizedBox(height: 6),
+            Text(
+              itemResponse.name,
+              style: const TextStyle(
+                fontSize: 13,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
-          ),
-          _toDiscountTag(DiscountType.fromQueryName(itemResponse.discountType)),
-        ],
+            const SizedBox(height: 6),
+            Text(
+              '$price원',
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 6),
+            _toDiscountTag(DiscountType.fromQueryName(itemResponse.discountType)),
+          ],
+        ),
       ),
     );
   }
