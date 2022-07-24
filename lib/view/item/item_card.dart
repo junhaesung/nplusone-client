@@ -19,16 +19,23 @@ class ItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final price = NplusoneFormatter.formatCurrency(
         double.parse(itemResponse.price).toInt());
-    return Card(
-      elevation: 0.0,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
+    return Container(
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              border: Border.all(
+                width: 0.5,
+                color: const Color.fromRGBO(244, 244, 244, 1.0),
+                style: BorderStyle.solid,
+              ),
+            ),
+            child: Center(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10.0),
                 child: Image.network(
                   itemResponse.imageUrl!,
                   height: imageHeight,
@@ -44,32 +51,32 @@ class ItemCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 6),
-            StoreLabel.of(
-              StoreType.fromQueryName(itemResponse.storeType),
-              fontSize: 11,
+          ),
+          const SizedBox(height: 6),
+          StoreLabel.of(
+            StoreType.fromQueryName(itemResponse.storeType),
+            fontSize: 11,
+          ),
+          const SizedBox(height: 6),
+          Text(
+            itemResponse.name,
+            style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.normal,
             ),
-            const SizedBox(height: 6),
-            Text(
-              itemResponse.name,
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.normal,
-              ),
-              overflow: TextOverflow.ellipsis,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 6),
+          Text(
+            '$price원',
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 6),
-            Text(
-              '$price원',
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 6),
-            _toDiscountTag(DiscountType.fromQueryName(itemResponse.discountType)),
-          ],
-        ),
+          ),
+          const SizedBox(height: 6),
+          _toDiscountTag(DiscountType.fromQueryName(itemResponse.discountType)),
+        ],
       ),
     );
   }
