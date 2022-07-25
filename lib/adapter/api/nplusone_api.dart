@@ -85,6 +85,32 @@ class NplusoneApi {
         .then((value) => ApiResponse.itemResponses(value));
   }
 
+  /// 검색 결과 개수
+  Future<ApiResponse<int?>> searchCount({
+    String? searchWord,
+    StoreType? storeType,
+    DiscountType? discountType,
+    int offsetId = 0,
+    int size = 20,
+  }) async {
+    final accessToken = await _tokenStorageApi.read();
+    return http
+        .post(Uri.http(_host, '/api/v1/search/count'),
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'searchWord': searchWord,
+          'storeType': storeType?.getQueryName(),
+          'discountType': discountType?.getQueryName(),
+          'offsetId': offsetId,
+          'pageSize': size,
+        }))
+        .then((value) => json.decode(utf8.decode(value.bodyBytes)))
+        .then((value) => ApiResponse.itemCountResponse(value));
+  }
+
   /// 최근 검색어 목록
   Future<ApiResponse<List<SearchHistoryResponse>>> getSearchHistories() async {
     final accessToken = await _tokenStorageApi.read();
@@ -145,6 +171,7 @@ class NplusoneApi {
         .then((value) => ApiResponse.itemResponses(value));
   }
 
+  /// item 전체 개수
   Future<ApiResponse<int?>> countItems({
     String? name,
     StoreType? storeType,
