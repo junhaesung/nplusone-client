@@ -5,6 +5,7 @@ import 'package:nplusone/adapter/api/nplusone_api.dart';
 import 'package:nplusone/domain/discount_type.dart';
 import 'package:nplusone/domain/store_type.dart';
 import 'package:nplusone/view/appbar/nplusone_app_bar.dart';
+import 'package:nplusone/view/nplusone_formatter.dart';
 import 'package:nplusone/view/search/result/search_grid_view.dart';
 
 class SearchResultView extends StatelessWidget {
@@ -46,11 +47,49 @@ class SearchResultView extends StatelessWidget {
                 if (!snapshot.hasData) {
                   return const Center(child: Text('조건에 맞는 상품이 없습니다'));
                 } else {
-                  return SearchGridView(
-                    items: snapshot.data!.data!,
-                    storeType: storeType,
-                    discountType: discountType,
-                    searchWord: searchWord,
+                  return Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text('\'$searchWord\' 검색결과',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          FutureBuilder<ApiResponse<int?>>(
+                            future: _api.searchCount(
+                              searchWord: searchWord,
+                              storeType: storeType,
+                              discountType: discountType,
+                            ),
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return Container();
+                              }
+                              final count = snapshot.data!.data!;
+                              return Text(NplusoneFormatter.formatCurrency(count),
+                                style: const TextStyle(
+                                  color: Color.fromRGBO(69, 0, 255, 1.0),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Expanded(
+                        child: SearchGridView(
+                          items: snapshot.data!.data!,
+                          storeType: storeType,
+                          discountType: discountType,
+                          searchWord: searchWord,
+                        ),
+                      ),
+                    ],
                   );
                 }
             }
