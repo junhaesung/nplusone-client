@@ -153,13 +153,13 @@ class HomeView extends StatelessWidget {
                 if (!snapshot.hasData) {
                   return Container();
                 }
-                final itemResponses = snapshot.data!.data!.take(20);
-                return ListView(
+                final itemResponses = snapshot.data!.data!.take(20).toList();
+                return ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  children: itemResponses
-                      .map((e) => ItemCard(e, imageHeight: 120))
-                      .toList(),
+                  itemBuilder: (context, index) => ItemCard(itemResponses[index], imageHeight: 140),
+                    separatorBuilder: (context, index) => const SizedBox(width: 10),
+                    itemCount: itemResponses.length,
                 );
               },
             ),

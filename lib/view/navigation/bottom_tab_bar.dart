@@ -14,19 +14,19 @@ class BottomTabBar extends StatelessWidget {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined),
-              label: 'Home',
+              label: '홈',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
-              label: 'Search',
+              label: '검색',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.book_outlined),
-              label: 'Item',
+              label: '상품',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.more_horiz_outlined),
-              label: 'More',
+              label: '더보기',
             ),
           ],
           currentIndex: state.tabIndex,
@@ -44,11 +44,6 @@ class BottomTabBar extends StatelessWidget {
               context.read<TabPageCubit>().showMorePage();
             }
           },
-          selectedItemColor: NplusoneColors.purple,
-          unselectedItemColor: Colors.grey,
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
         );
       },
     );
