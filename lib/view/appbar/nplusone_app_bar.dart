@@ -70,7 +70,6 @@ class NplusoneAppBar {
           fontFamily: 'BmDohyeon',
         ),
       ),
-      centerTitle: true,
       actions: [
         IconButton(
           onPressed: () {},
@@ -80,9 +79,6 @@ class NplusoneAppBar {
           ),
         ),
       ],
-      backgroundColor: Colors.transparent,
-      // Remove shadow
-      elevation: 0,
     );
   }
 }

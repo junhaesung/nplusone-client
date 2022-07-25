@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nplusone/view/navigation/tab_page_cubit.dart';
 import 'package:nplusone/view/navigation/tab_page_navigator.dart';
+import 'package:nplusone/view/nplusone_colors.dart';
 
 class NplusoneApp extends StatelessWidget {
   const NplusoneApp({Key? key}) : super(key: key);
@@ -15,8 +16,21 @@ class NplusoneApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            centerTitle: true,
+            elevation: 0,
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            selectedItemColor: NplusoneColors.purple,
+            unselectedItemColor: Colors.grey,
+            type: BottomNavigationBarType.fixed,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+          ),
+          canvasColor: Colors.white,
           fontFamily: 'Pretendard',
+          primarySwatch: Colors.purple,
         ),
         home: const TabPageNavigator(),
       ),
