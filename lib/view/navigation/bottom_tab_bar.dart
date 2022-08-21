@@ -53,6 +53,8 @@ class BottomTabBar extends StatelessWidget {
           },
           selectedItemColor: Colors.black,
           unselectedItemColor: const Color.fromRGBO(170, 170, 170, 1.0),
+          selectedFontSize: 10.0,
+          unselectedFontSize: 10.0,
         );
       },
     );
