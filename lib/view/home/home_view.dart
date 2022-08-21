@@ -44,27 +44,42 @@ class HomeView extends StatelessWidget {
       StoreTabData(
         storeType: StoreType.cu,
         title: StoreLabel.of(StoreType.cu),
-        color: const Color.fromRGBO(245, 249, 233, 1.0),
+        image: Image.asset(
+          "images/drawable-xhdpi/main_icon_cu.png",
+          fit: BoxFit.fitHeight,
+        ),
       ),
       StoreTabData(
         storeType: StoreType.gs25,
         title: StoreLabel.of(StoreType.gs25),
-        color: const Color.fromRGBO(230, 247, 250, 1.0),
+        image: Image.asset(
+          "images/drawable-xhdpi/main_icon_gs25.png",
+          fit: BoxFit.fitHeight,
+        ),
       ),
       StoreTabData(
         storeType: StoreType.emart24,
         title: StoreLabel.of(StoreType.emart24),
-        color: const Color.fromRGBO(255, 245, 228, 1.0),
+        image: Image.asset(
+          "images/drawable-xhdpi/main_icon_emart24.png",
+          fit: BoxFit.fitHeight,
+        ),
       ),
       StoreTabData(
         storeType: StoreType.sevenEleven,
         title: StoreLabel.of(StoreType.sevenEleven),
-        color: const Color.fromRGBO(229, 240, 230, 1.0),
+        image: Image.asset(
+          "images/drawable-xhdpi/main_icon_seven_eleven.png",
+          fit: BoxFit.fitHeight,
+        ),
       ),
       StoreTabData(
         storeType: StoreType.ministop,
         title: StoreLabel.of(StoreType.ministop),
-        color: const Color.fromRGBO(225, 230, 240, 1.0),
+        image: Image.asset(
+          "images/drawable-xhdpi/main_icon_ministop.png",
+          fit: BoxFit.fitHeight,
+        ),
       ),
     ];
     return Padding(
@@ -88,9 +103,7 @@ class HomeView extends StatelessWidget {
                         child: SizedBox(
                           width: 100,
                           height: 100,
-                          child: Container(
-                            color: e.color,
-                          ),
+                          child: e.image,
                         ),
                       ),
                       const SizedBox(height: 4.0),
@@ -157,9 +170,11 @@ class HomeView extends StatelessWidget {
                 return ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => ItemCard(itemResponses[index], imageHeight: 140),
-                    separatorBuilder: (context, index) => const SizedBox(width: 10),
-                    itemCount: itemResponses.length,
+                  itemBuilder: (context, index) =>
+                      ItemCard(itemResponses[index], imageHeight: 140),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 10),
+                  itemCount: itemResponses.length,
                 );
               },
             ),
@@ -183,11 +198,11 @@ class HomeView extends StatelessWidget {
 class StoreTabData {
   StoreType storeType;
   Widget title;
-  Color color;
+  Widget image;
 
   StoreTabData({
     required this.storeType,
     required this.title,
-    required this.color,
+    required this.image,
   });
 }

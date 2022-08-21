@@ -111,3 +111,9 @@ flutter:
     - family: BmDohyeon
       fonts:
         - asset: fonts/BmDohyeon.otf
+  assets:
+    - images/drawable-xhdpi/main_icon_cu.png
+    - images/drawable-xhdpi/main_icon_gs25.png
+    - images/drawable-xhdpi/main_icon_seven_eleven.png
+    - images/drawable-xhdpi/main_icon_emart24.png
+    - images/drawable-xhdpi/main_icon_ministop.png
