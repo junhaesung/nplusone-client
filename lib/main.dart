@@ -49,6 +49,21 @@ void main() async {
     sound: true,
   );
 
+  FirebaseMessaging.onMessage.listen((message) async {
+    if (message.notification != null) {
+      if (kDebugMode) {
+        print(
+          'Message contained a notification, with the following:\nTitle: ${message.notification?.title}\nBody: ${message.notification?.body}');
+      }
+    }
+    if (message.data.isNotEmpty) {
+      if (kDebugMode) {
+        print('Message contained a data. ${message.data}');
+      }
+    }
+    return;
+  });
+
   if (settings.authorizationStatus == AuthorizationStatus.authorized) {
     if (kDebugMode) {
       print('User granted permission');
