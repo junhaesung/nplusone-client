@@ -117,3 +117,7 @@ flutter:
     - images/drawable-xhdpi/main_icon_seven_eleven.png
     - images/drawable-xhdpi/main_icon_emart24.png
     - images/drawable-xhdpi/main_icon_ministop.png
+    - images/drawable-xhdpi/main_tab_home.png
+    - images/drawable-xhdpi/main_tab_search.png
+    - images/drawable-xhdpi/main_tab_item.png
+    - images/drawable-xhdpi/main_tab_more.png

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nplusone/view/navigation/tab_page_cubit.dart';
-import 'package:nplusone/view/nplusone_colors.dart';
 
 class BottomTabBar extends StatelessWidget {
   const BottomTabBar({Key? key}) : super(key: key);
@@ -13,19 +12,27 @@ class BottomTabBar extends StatelessWidget {
         return BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
+              icon: ImageIcon(
+                AssetImage('images/drawable-xhdpi/main_tab_home.png'),
+              ),
               label: '홈',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
+              icon: ImageIcon(
+                AssetImage('images/drawable-xhdpi/main_tab_search.png'),
+              ),
               label: '검색',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.book_outlined),
+              icon: ImageIcon(
+                AssetImage('images/drawable-xhdpi/main_tab_item.png'),
+              ),
               label: '상품',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.more_horiz_outlined),
+              icon: ImageIcon(
+                AssetImage('images/drawable-xhdpi/main_tab_more.png'),
+              ),
               label: '더보기',
             ),
           ],
@@ -44,6 +51,8 @@ class BottomTabBar extends StatelessWidget {
               context.read<TabPageCubit>().showMorePage();
             }
           },
+          selectedItemColor: Colors.black,
+          unselectedItemColor: const Color.fromRGBO(170, 170, 170, 1.0),
         );
       },
     );
